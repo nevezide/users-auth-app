@@ -7,12 +7,6 @@ export default function LoginForm(props) {
   const [password, setPassword] = useState('');
 
   const onLogin = async () => {
-
-    console.log({
-      login,
-      password
-    });
-
     return fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {

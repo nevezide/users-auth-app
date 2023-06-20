@@ -1,11 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login succeed 1`] = `
+exports[`Error on login 1`] = `
 "Snapshot Diff:
 - First value
 + Second value
 
-@@ -11,11 +11,11 @@
+@@ -2,22 +2,24 @@
+    <section
+      class=\\"form\\"
+    >
+      <div
+        class=\\"error\\"
+-     />
++     >
++       An error occurs on login
++     </div>
+      <label
+        for=\\"login\\"
+      >
+        Login
+      </label>
       <input
         id=\\"login\\"
         name=\\"login\\"
@@ -18,7 +32,7 @@ exports[`Login succeed 1`] = `
         for=\\"password\\"
       >
         Mot de passe
-@@ -23,11 +23,11 @@
+@@ -25,11 +27,11 @@
       <input
         id=\\"password\\"
         name=\\"password\\"
@@ -30,7 +44,87 @@ exports[`Login succeed 1`] = `
       <button>
         S'identifier
       </button>
-    </form>"
+    </section>"
+`;
+
+exports[`Login fail 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -2,22 +2,24 @@
+    <section
+      class=\\"form\\"
+    >
+      <div
+        class=\\"error\\"
+-     />
++     >
++       Login / Password Incorrect
++     </div>
+      <label
+        for=\\"login\\"
+      >
+        Login
+      </label>
+      <input
+        id=\\"login\\"
+        name=\\"login\\"
+        placeholder=\\"Votre email ou pseudo\\"
+        type=\\"text\\"
+-       value=\\"\\"
++       value=\\"nevezide\\"
+      />
+      <label
+        for=\\"password\\"
+      >
+        Mot de passe
+@@ -25,11 +27,11 @@
+      <input
+        id=\\"password\\"
+        name=\\"password\\"
+        placeholder=\\"Votre mot de passe\\"
+        type=\\"password\\"
+-       value=\\"\\"
++       value=\\"incorrect\\"
+      />
+      <button>
+        S'identifier
+      </button>
+    </section>"
+`;
+
+exports[`Login succeed 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -13,11 +13,11 @@
+      <input
+        id=\\"login\\"
+        name=\\"login\\"
+        placeholder=\\"Votre email ou pseudo\\"
+        type=\\"text\\"
+-       value=\\"\\"
++       value=\\"nevezide\\"
+      />
+      <label
+        for=\\"password\\"
+      >
+        Mot de passe
+@@ -25,11 +25,11 @@
+      <input
+        id=\\"password\\"
+        name=\\"password\\"
+        placeholder=\\"Votre mot de passe\\"
+        type=\\"password\\"
+-       value=\\"\\"
++       value=\\"nevezide\\"
+      />
+      <button>
+        S'identifier
+      </button>
+    </section>"
 `;
 
 exports[`Show Login form 1`] = `
