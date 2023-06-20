@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState} from 'react';
 
 export default function LoginForm(props) {
@@ -5,14 +6,14 @@ export default function LoginForm(props) {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const onLogin = (e) => {
-    e.preventDefault();
+  const onLogin = async () => {
 
     console.log({
       login,
       password
-    })
-    fetch('http://localhost:3000/login', {
+    });
+
+    return fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -29,15 +30,17 @@ export default function LoginForm(props) {
         setError('Login / Password Incorrect')
       }
     })
-    .catch(() => setError('An error occurs on login'))
+    .catch(() => setError('An error occurs on login'));
   };
 
   return (
-    <form>
+    <section className="form">
       <div className="error">{error}</div>
-      <input type='text' name='login' placeholder='Votre email ou pseudo' onChange={(event) => setLogin(event.target.value)} value={login} />
-      <input type='password' name='password' placeholder='Votre mot de passe' onChange={(event) => setPassword(event.target.value)} value={password} />
+      <label htmlFor='login'>Login</label>
+      <input type='text' id='login' name='login' placeholder='Votre email ou pseudo' onChange={(event) => setLogin(event.target.value)} value={login} />
+      <label htmlFor='password'>Mot de passe</label>
+      <input type='password' id='password' name='password' placeholder='Votre mot de passe' onChange={(event) => setPassword(event.target.value)} value={password} />
       <button onClick={onLogin}>S'identifier</button>
-    </form>
+    </section>
   );
 }

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login succeed 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+@@ -11,11 +11,11 @@
+      <input
+        id=\\"login\\"
+        name=\\"login\\"
+        placeholder=\\"Votre email ou pseudo\\"
+        type=\\"text\\"
+-       value=\\"\\"
++       value=\\"nevezide\\"
+      />
+      <label
+        for=\\"password\\"
+      >
+        Mot de passe
+@@ -23,11 +23,11 @@
+      <input
+        id=\\"password\\"
+        name=\\"password\\"
+        placeholder=\\"Votre mot de passe\\"
+        type=\\"password\\"
+-       value=\\"\\"
++       value=\\"nevezide\\"
+      />
+      <button>
+        S'identifier
+      </button>
+    </form>"
+`;
+
+exports[`Show Login form 1`] = `
+<div>
+  <section
+    class="form"
+  >
+    <div
+      class="error"
+    />
+    <label
+      for="login"
+    >
+      Login
+    </label>
+    <input
+      id="login"
+      name="login"
+      placeholder="Votre email ou pseudo"
+      type="text"
+      value=""
+    />
+    <label
+      for="password"
+    >
+      Mot de passe
+    </label>
+    <input
+      id="password"
+      name="password"
+      placeholder="Votre mot de passe"
+      type="password"
+      value=""
+    />
+    <button>
+      S'identifier
+    </button>
+  </section>
+</div>
+`;
