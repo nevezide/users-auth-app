@@ -17,12 +17,49 @@ beforeEach(() => {
 afterEach(cleanup);
 
 it('Show Login form', () => {
-  const isLogged = false;
+  // Render du composant à tester
   const component = render(
-    <LoginForm isLogged={isLogged} />,
+    <LoginForm />,
   );
 
+  // Vérifie que le render du composant correspond à celui attendu
   expect(component.container).toMatchSnapshot()
+});
+
+it('Error on login', async () => {
+  // Simule l'appel à la fonction passée en props une fois le login réalisé avec succès
+  const onLogged = jest.fn();
+
+  // Render du composant à tester
+  const { getByRole, getByLabelText, asFragment } = render(
+    <LoginForm onLogged={onLogged} />,
+  );
+
+  // Mock une réponse du backend lorsqu'il y a une erreur 500
+  fetchMock.mockResponseOnce((req) => {
+    return Promise.reject({
+      error: 'Erreur'
+    });
+  });
+
+  // Créer un premier snap qui servira de base pour la comparaison à la fin du test
+  const firstRender = asFragment();
+
+  // Simule les actions de l'utilisateur : saisie et clic sur bouton
+  fireEvent.change(getByLabelText(/login/i), {target: {value: 'nevezide'}})
+  fireEvent.change(getByLabelText(/mot de passe/i), {target: {value: 'nevezide'}})
+  fireEvent.click(getByRole('button'));
+
+  // Attend la réponse du mock du serveur (asynchrone)
+  // en recherchant la chaine de texte qui doit s'afficher dans le composant.
+  await screen.findByText('An error occurs on login');
+  expect(onLogged).toHaveBeenCalledTimes(0);
+
+  // Créer un second snap pour la comparaison à la fin du test
+  const lastFragment = asFragment();
+
+  // Compare les différences entre les snaps avant et après les actions de l'utilisateur et du comportement du serveur simulé.
+  expect(firstRender).toMatchDiffSnapshot(lastFragment)
 });
 
 it('Login succeed', async () => {
@@ -76,30 +113,6 @@ it('Login fail', async () => {
   fireEvent.click(getByRole('button'));
 
   await screen.findByText('Login / Password Incorrect');
-  expect(onLogged).toHaveBeenCalledTimes(0);
-
-  const lastFragment = asFragment();
-
-  expect(firstRender).toMatchDiffSnapshot(lastFragment)
-});
-
-it('Error on login', async () => {
-  const onLogged = jest.fn();
-  const { getByRole, getByLabelText, asFragment } = render(
-    <LoginForm onLogged={onLogged} />,
-  );
-  fetchMock.mockResponseOnce((req) => {
-    return Promise.reject({
-      error: 'Erreur'
-    });
-  });
-  const firstRender = asFragment();
-
-  fireEvent.change(getByLabelText(/login/i), {target: {value: 'nevezide'}})
-  fireEvent.change(getByLabelText(/mot de passe/i), {target: {value: 'nevezide'}})
-  fireEvent.click(getByRole('button'));
-
-  await screen.findByText('An error occurs on login');
   expect(onLogged).toHaveBeenCalledTimes(0);
 
   const lastFragment = asFragment();
